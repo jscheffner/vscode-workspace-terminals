@@ -1,0 +1,46 @@
+{
+	"name": "workspace-terminals",
+	"displayName": "workspace-terminals",
+	"description": "",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": "^1.37.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.openWorkspaceTerminals",
+				"title": "Open Workspace Terminals"
+			}
+		],
+		"configuration": {
+			"title": "Workspace Terminals",
+			"properties": {
+				"workspace-terminals.auto": {
+					"type": "boolean",
+					"default": false,
+					"description": "Open terminals on start and every time a folder is added to the workspace"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"lint": "tslint src/**/*.ts"
+	},
+	"devDependencies": {
+		"@types/node": "^10.12.21",
+		"@types/vscode": "^1.37.0",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1"
+	}
+}
