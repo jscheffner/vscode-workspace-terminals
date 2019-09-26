@@ -1,6 +1,8 @@
 {
 	"name": "workspace-terminals",
 	"displayName": "workspace-terminals",
+	"publisher": "joshx",
+	"repository": "github:jscheffner/vscode-workspace-terminals",
 	"description": "",
 	"version": "0.1.0",
 	"engines": {
@@ -35,7 +37,8 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"lint": "tslint src/**/*.ts"
+		"lint": "tslint src/**/*.ts",
+		"format": "npm run lint -- --fix"
 	},
 	"devDependencies": {
 		"@types/node": "^10.12.21",
