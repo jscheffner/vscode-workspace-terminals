@@ -1,16 +1,27 @@
 {
 	"name": "workspace-terminals",
-	"displayName": "workspace-terminals",
-	"publisher": "joshx",
-	"repository": "github:jscheffner/vscode-workspace-terminals",
-	"description": "",
+	"displayName": "Workspace Terminals",
+	"description": "Manage terminals in multi-root workspaces",
 	"version": "0.1.0",
+	"publisher": "joshx",
 	"engines": {
 		"vscode": "^1.37.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"multi-root",
+		"terminals",
+		"workspaces",
+		"auto",
+		"productivity"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jscheffner/vscode-workspace-terminals.git"
+	},
+	"license": "ISC",
 	"activationEvents": [
 		"*"
 	],
@@ -26,9 +37,15 @@
 			"title": "Workspace Terminals",
 			"properties": {
 				"workspace-terminals.auto": {
-					"type": "boolean",
-					"default": false,
-					"description": "Open terminals on start and every time a folder is added to the workspace"
+					"type": "string",
+					"default": "multi-root",
+					"enum": ["never", "multi-root", "always"],
+					"enumDescriptions": [
+						"Use the command to open a workspace terminal. ",
+						"Automatically open a terminal when there are multiple workspace folders",
+						"Automaticallyways open a terminal, even if there is only one workspace folder"
+					],
+					"description": "Open terminals on start and every time a workspace folder is added to the workspace"
 				}
 			}
 		}

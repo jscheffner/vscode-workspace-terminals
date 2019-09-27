@@ -1,20 +1,29 @@
 import { window, workspace, ExtensionContext, commands } from 'vscode';
 
+const openWorkspaceTerminals = () => {
+  const { workspaceFolders = [] } = workspace;
+  const terminals = workspaceFolders
+    .filter(({ name }) => !window.terminals.find(term => term.name === name))
+    .map(({ uri, name }) => window.createTerminal({ cwd: uri, name }));
+  
+  if (terminals[0]) {
+    terminals[0].show();
+  }
+};
+
 const autoExecute = () => {
-    if (workspace.getConfiguration('workspace-terminals').auto) {
-      commands.executeCommand('extension.openWorkspaceTerminals');
-    }
+  const { auto } = workspace.getConfiguration('workspace-terminals');
+  const numberOfWorkspaceFolders = workspace.workspaceFolders
+    ? workspace.workspaceFolders.length
+    : 0;
+
+  if (auto === 'always' || (auto === 'multi-root' && numberOfWorkspaceFolders > 1)) {
+    openWorkspaceTerminals();
+  }
 };
 
 export function activate(context: ExtensionContext) {
-  commands.registerCommand('extension.openWorkspaceTerminals', () => {
-    return (workspace.workspaceFolders  || []).map(folder => {
-      if (!window.terminals.find(term => term.name === folder.name)) {
-        return window.createTerminal({ cwd: folder.uri, name: folder.name });
-      }
-    });
-  });
-
+  commands.registerCommand('extension.openWorkspaceTerminals', openWorkspaceTerminals);
   autoExecute();
   workspace.onDidChangeConfiguration(autoExecute);
 }

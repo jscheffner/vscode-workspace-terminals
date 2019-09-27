@@ -1,1 +1,2 @@
-# workspace-terminals
+# Workspace Terminals
+
