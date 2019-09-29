@@ -21,6 +21,7 @@
 		"type": "git",
 		"url": "https://github.com/jscheffner/vscode-workspace-terminals.git"
 	},
+	"icon": "icon.png",
 	"license": "ISC",
 	"activationEvents": [
 		"*"
