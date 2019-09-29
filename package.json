@@ -46,9 +46,9 @@
 						"always"
 					],
 					"enumDescriptions": [
-						"Use the command to open a workspace terminal. ",
-						"Automatically open a terminal when there are multiple workspace folders",
-						"Automaticallyways open a terminal, even if there is only one workspace folder"
+						"Open terminals manually using the command.",
+						"Automatically open terminals if there are multiple workspace folders.",
+						"Automatically open terminals, even if there is only one workspace folder."
 					],
 					"description": "Open terminals on start and every time a workspace folder is added to the workspace"
 				}
