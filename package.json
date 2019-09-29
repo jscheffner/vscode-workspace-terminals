@@ -2,7 +2,7 @@
 	"name": "workspace-terminals",
 	"displayName": "Workspace Terminals",
 	"description": "Manage terminals in multi-root workspaces",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"publisher": "joshx",
 	"engines": {
 		"vscode": "^1.37.0"
@@ -40,7 +40,11 @@
 				"workspace-terminals.auto": {
 					"type": "string",
 					"default": "multi-root",
-					"enum": ["never", "multi-root", "always"],
+					"enum": [
+						"never",
+						"multi-root",
+						"always"
+					],
 					"enumDescriptions": [
 						"Use the command to open a workspace terminal. ",
 						"Automatically open a terminal when there are multiple workspace folders",
