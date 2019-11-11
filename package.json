@@ -51,6 +51,11 @@
 						"Automatically open terminals, even if there is only one workspace folder."
 					],
 					"description": "Open terminals on start and every time a workspace folder is added to the workspace"
+				},
+				"workspace-terminals.switch_terminals": {
+					"type": "boolean",
+					"default": false,
+					"description": "Switch to the corresponding terminal when switching editors."
 				}
 			}
 		}

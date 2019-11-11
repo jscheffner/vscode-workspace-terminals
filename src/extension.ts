@@ -5,7 +5,7 @@ const openWorkspaceTerminals = () => {
   const terminals = workspaceFolders
     .filter(({ name }) => !window.terminals.find(term => term.name === name))
     .map(({ uri, name }) => window.createTerminal({ cwd: uri, name }));
-  
+
   if (terminals[0]) {
     terminals[0].show();
   }
@@ -22,10 +22,38 @@ const autoExecute = () => {
   }
 };
 
+
+function changedEditor(e: any) {
+  let folders = workspace.workspaceFolders;
+  let terms = window.terminals;
+  if (folders != undefined) {
+    for (let f of folders) {
+      // if editor's filepath includes workspace folder
+      if (e.document.fileName.includes(f.uri.path)) {
+        // and if there's a corresponding terminal
+        for (let t of terms) {
+          if (t.name == f.name) {
+            // switch to that terminal
+            t.show(false);
+          }
+        }
+      }
+    }
+  }
+}
+
 export function activate(context: ExtensionContext) {
   commands.registerCommand('extension.openWorkspaceTerminals', openWorkspaceTerminals);
   autoExecute();
   workspace.onDidChangeConfiguration(autoExecute);
+
+  let switch_terminals = workspace.getConfiguration('workspace-terminals').get("switch_terminals");
+  if (switch_terminals) {
+    // trigger at every active editor change
+    window.onDidChangeActiveTextEditor(e => {
+      changedEditor(e);
+    });
+  }
 }
 
-export function deactivate() {}
+export function deactivate() { }
