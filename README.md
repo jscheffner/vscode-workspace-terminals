@@ -11,3 +11,5 @@ Per default, **Workspace Terminals** will open a terminal per workspace folder i
 If you don't want to automatically open terminals, set the `workspace-terminals.auto` setting to `never`. You can use the command `> Open Workspace Terminals` to trigger the behavior manually.
 
 If you want to automatically open a terminal even for single-root workspaces, set the `workspace-terminals.auto` setting to `always`.
+
+If you want to switch to the corresponding terminal relative to the file currently edited, set `workspace-terminals.switch_terminals` to true.
