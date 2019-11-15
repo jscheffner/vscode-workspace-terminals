@@ -52,9 +52,19 @@
 					],
 					"description": "Open terminals on start and every time a workspace folder is added to the workspace"
 				},
-				"workspace-terminals.switch_terminals": {
-					"type": "boolean",
-					"default": false,
+				"workspace-terminals.switchTerminal": {
+					"type": "string",
+					"default": "never",
+					"enum": [
+						"never",
+						"from workspace terminals",
+						"always"
+					],
+					"enumDescriptions": [
+						"Never switch terminals",
+						"Switch terminals from other workspace terminals but not from terminals that weren't created by `workspace-terminals`",
+						"Switch terminals when switching editors, even if the currently active terminal wasn't created by `workspace-terminals`."
+					],
 					"description": "Switch to the corresponding terminal when switching editors."
 				}
 			}

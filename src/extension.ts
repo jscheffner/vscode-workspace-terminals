@@ -1,4 +1,4 @@
-import { window, workspace, ExtensionContext, commands } from 'vscode';
+import { window, workspace, ExtensionContext, commands, TextEditor } from 'vscode';
 
 const openWorkspaceTerminals = () => {
   const { workspaceFolders = [] } = workspace;
@@ -22,38 +22,39 @@ const autoExecute = () => {
   }
 };
 
+const switchTerminal = (editor: TextEditor | undefined) => {
+  const { workspaceFolders, getWorkspaceFolder, getConfiguration } = workspace;
+  const { switchTerminal } = getConfiguration('workspace-terminals');
+  const { activeTerminal } = window;
 
-function changedEditor(e: any) {
-  let folders = workspace.workspaceFolders;
-  let terms = window.terminals;
-  if (folders != undefined) {
-    for (let f of folders) {
-      // if editor's filepath includes workspace folder
-      if (e.document.fileName.includes(f.uri.path)) {
-        // and if there's a corresponding terminal
-        for (let t of terms) {
-          if (t.name == f.name) {
-            // switch to that terminal
-            t.show(false);
-          }
-        }
-      }
-    }
+  const isActiveTerminalWorkspaceTerminal = () => activeTerminal
+    && workspaceFolders
+    && workspaceFolders.some(({ name }) => name === activeTerminal.name);
+
+  if (!editor || switchTerminal === 'never' || (switchTerminal === 'from workspace terminals' && !isActiveTerminalWorkspaceTerminal())) {
+    return;
   }
+
+  const folder = getWorkspaceFolder(editor.document.uri);
+
+  if (folder === undefined || (activeTerminal && folder.name === activeTerminal.name)) {
+    return;
+  }
+  
+  const term = window.terminals.find(({ name }) => (name === folder.name));
+
+  if (term === undefined) {
+    return;
+  }
+
+  term.show(false);
 }
 
 export function activate(context: ExtensionContext) {
   commands.registerCommand('extension.openWorkspaceTerminals', openWorkspaceTerminals);
   autoExecute();
   workspace.onDidChangeConfiguration(autoExecute);
-
-  let switch_terminals = workspace.getConfiguration('workspace-terminals').get("switch_terminals");
-  if (switch_terminals) {
-    // trigger at every active editor change
-    window.onDidChangeActiveTextEditor(e => {
-      changedEditor(e);
-    });
-  }
+  window.onDidChangeActiveTextEditor(switchTerminal);
 }
 
 export function deactivate() { }
