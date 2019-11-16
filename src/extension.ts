@@ -17,7 +17,7 @@ const autoExecute = () => {
     ? workspace.workspaceFolders.length
     : 0;
 
-  if (auto === 'always' || (auto === 'multi-root' && numberOfWorkspaceFolders > 1)) {
+  if (auto === 'always' || (auto === 'multiRoot' && numberOfWorkspaceFolders > 1)) {
     openWorkspaceTerminals();
   }
 };
@@ -31,7 +31,7 @@ const switchTerminal = (editor: TextEditor | undefined) => {
     && workspaceFolders
     && workspaceFolders.some(({ name }) => name === activeTerminal.name);
 
-  if (!editor || switchTerminal === 'never' || (switchTerminal === 'from workspace terminals' && !isActiveTerminalWorkspaceTerminal())) {
+  if (!editor || switchTerminal === 'never' || (switchTerminal === 'fromWorkspaceTerminals' && !isActiveTerminalWorkspaceTerminal())) {
     return;
   }
 
@@ -48,7 +48,7 @@ const switchTerminal = (editor: TextEditor | undefined) => {
   }
 
   term.show(false);
-}
+};
 
 export function activate(context: ExtensionContext) {
   commands.registerCommand('extension.openWorkspaceTerminals', openWorkspaceTerminals);
