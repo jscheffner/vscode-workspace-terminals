@@ -54,6 +54,7 @@ export function activate(context: ExtensionContext) {
   commands.registerCommand('extension.openWorkspaceTerminals', openWorkspaceTerminals);
   autoExecute();
   workspace.onDidChangeConfiguration(autoExecute);
+  workspace.onDidChangeWorkspaceFolders(autoExecute);
   window.onDidChangeActiveTextEditor(switchTerminal);
 }
 
