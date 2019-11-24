@@ -1,14 +1,26 @@
-import { window, workspace, ExtensionContext, commands, TextEditor } from 'vscode';
+import { window, workspace, ExtensionContext, commands, TextEditor, Terminal, WorkspaceFolder } from 'vscode';
+
+const getActiveWorkspaceTerminal = (editor: TextEditor, terminals: readonly Terminal[]): Terminal | undefined => {
+  const folder = workspace.getWorkspaceFolder(editor.document.uri);
+  if (!folder) {
+    return;
+  }
+
+  return terminals.find(({ name }) => (name === folder.name));
+};
 
 const openWorkspaceTerminals = () => {
   const { workspaceFolders = [] } = workspace;
-  const terminals = workspaceFolders
+  const { activeTextEditor } = window;
+
+  const createdTerminals = workspaceFolders
     .filter(({ name }) => !window.terminals.find(term => term.name === name))
     .map(({ uri, name }) => window.createTerminal({ cwd: uri, name }));
 
-  if (terminals[0]) {
-    terminals[0].show();
-  }
+  const activeWorkspaceTerminal = activeTextEditor && getActiveWorkspaceTerminal(activeTextEditor, createdTerminals);
+  const switchTo = activeWorkspaceTerminal || createdTerminals[0];
+
+  switchTo?.show(false);
 };
 
 const autoExecute = () => {
@@ -23,7 +35,7 @@ const autoExecute = () => {
 };
 
 const switchTerminal = (editor: TextEditor | undefined) => {
-  const { workspaceFolders, getWorkspaceFolder, getConfiguration } = workspace;
+  const { workspaceFolders, getConfiguration } = workspace;
   const { switchTerminal } = getConfiguration('workspace-terminals');
   const { activeTerminal } = window;
 
@@ -35,19 +47,7 @@ const switchTerminal = (editor: TextEditor | undefined) => {
     return;
   }
 
-  const folder = getWorkspaceFolder(editor.document.uri);
-
-  if (folder === undefined || (activeTerminal && folder.name === activeTerminal.name)) {
-    return;
-  }
-  
-  const term = window.terminals.find(({ name }) => (name === folder.name));
-
-  if (term === undefined) {
-    return;
-  }
-
-  term.show(false);
+  getActiveWorkspaceTerminal(editor, window.terminals)?.show(false);
 };
 
 export function activate(context: ExtensionContext) {
