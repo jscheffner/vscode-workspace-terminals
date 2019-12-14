@@ -62,10 +62,10 @@
 					],
 					"enumDescriptions": [
 						"Never switch terminals",
-						"Switch terminals from other workspace terminals but not from terminals that weren't created by Workspace Terminals`",
-						"Switch terminals when switching editors, even if the currently active terminal wasn't created by Workspace Terminals`."
+						"Switch terminals from other workspace terminals but not from terminals that weren't created by Workspace Terminals",
+						"Switch terminals when switching editors, even if the currently active terminal wasn't created by Workspace Terminals."
 					],
-					"description": "Switch to the corresponding terminal when switching editors."
+					"description": "Switch to the corresponding terminal when switching text editors."
 				}
 			}
 		}
