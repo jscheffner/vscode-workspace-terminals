@@ -20,7 +20,7 @@ const openWorkspaceTerminals = () => {
   const activeWorkspaceTerminal = activeTextEditor && getActiveWorkspaceTerminal(activeTextEditor, createdTerminals);
   const switchTo = activeWorkspaceTerminal || createdTerminals[0];
 
-  switchTo?.show(false);
+  switchTo?.show(true);
 };
 
 const autoExecute = () => {
@@ -47,7 +47,7 @@ const switchTerminal = (editor: TextEditor | undefined) => {
     return;
   }
 
-  getActiveWorkspaceTerminal(editor, window.terminals)?.show(false);
+  getActiveWorkspaceTerminal(editor, window.terminals)?.show(true);
 };
 
 export function activate(context: ExtensionContext) {
