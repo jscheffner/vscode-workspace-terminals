@@ -12,4 +12,4 @@ If you don't want to automatically open terminals, set the `workspace-terminals.
 
 If you want to automatically open a terminal even for single-root workspaces, set the `workspace-terminals.auto` setting to `always`.
 
-To automatically switch to the workspace terminal of the file you are editing, set the `workspace-terminals.switchTerminals` setting to either `always` or `fromWorkspaceTerminals`. `fromWorkspaceTerminals` prevents switching the terminal if the current terminal wasn't created by **Workspace Terminals**
+To automatically switch to the workspace terminal of the file you are editing, set the `workspace-terminals.switchTerminal` setting to either `always` or `fromWorkspaceTerminals`. `fromWorkspaceTerminals` prevents switching the terminal if the current terminal wasn't created by **Workspace Terminals**
