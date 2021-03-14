@@ -73,6 +73,7 @@
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
+		"check-types": "tsc --noEmit -p ./",
 		"watch": "tsc -watch -p ./",
 		"lint": "tslint src/**/*.ts",
 		"format": "npm run lint -- --fix"
