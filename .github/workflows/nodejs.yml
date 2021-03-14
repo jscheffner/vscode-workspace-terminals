@@ -1,0 +1,17 @@
+---
+name: Node CI
+on: [push]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 12
+    - name: install, lint, and check types
+      run: |
+        npm install
+        npm run lint
+        npm run check-types
