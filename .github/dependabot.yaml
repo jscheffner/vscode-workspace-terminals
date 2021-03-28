@@ -4,3 +4,7 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    ignore:
+      # for backwards compatibility with older vscode versions
+      - dependency-name: "@types/node"
+      - dependency-name: "@types/vscode"
