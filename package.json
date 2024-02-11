@@ -24,7 +24,7 @@
 	"icon": "icon.png",
 	"license": "ISC",
 	"activationEvents": [
-		"*"
+		"onStartupFinished"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
