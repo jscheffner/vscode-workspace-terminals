@@ -23,7 +23,7 @@ jobs:
       with:
         script: |
           const { readFile } = require('fs')
-          const data = await readFile(context.env.PACKAGE_FILE)
+          const data = await readFile(process.env.PACKAGE_FILE)
           await github.rest.repos.uploadReleaseAsset({
             owner: context.repo.owner,
             repo: context.repo.repo,
