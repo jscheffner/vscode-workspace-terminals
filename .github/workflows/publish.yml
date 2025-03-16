@@ -23,12 +23,20 @@ jobs:
       with:
         script: |
           const { readFileSync } = require('fs')
-          const data = readFileSync(process.env.PACKAGE_FILE)
+          const { PACKAGE_FILE } = process.env
+          const data = readFileSync(PACKAGE_FILE)
+
+          const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: context.ref
+          });
+
           await github.rest.repos.uploadReleaseAsset({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            release_id: context.event.release.id,
-            name: context.env.PACKAGE_FILE,
+            release_id: release.data.id,
+            name: PACKAGE_FILE,
             data,
           });
     - name: publish to VS Code Marketplace
