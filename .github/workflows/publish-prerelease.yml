@@ -22,7 +22,6 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-        script: |
           const { readFileSync } = require('fs')
           const { PACKAGE_FILE } = process.env
           const data = readFileSync(PACKAGE_FILE)
