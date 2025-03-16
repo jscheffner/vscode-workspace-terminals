@@ -1,0 +1,33 @@
+---
+name: Publish Pre-release
+on:
+  release:
+    types: [prereleased]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+    - name: install
+      run: npm install
+    - name: setup environment
+      run: node -e "console.log('PACKAGE_FILE=' + require('./package.json').name + '-' + require('./package.json').version + '.vsix')" >> $GITHUB_ENV
+    - name: package
+      run: npm run package
+    - name: upload vsix file to release
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const { readFile } = require('fs')
+          const data = await readFile(context.env.PACKAGE_FILE)
+          await github.rest.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: context.event.release.id,
+            name: context.env.PACKAGE_FILE,
+            data,
+          });
