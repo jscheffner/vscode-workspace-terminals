@@ -86,6 +86,6 @@
 		"eslint": "^9.23.0",
 		"neostandard": "^0.12.1",
 		"ovsx": "^0.10.1",
-		"typescript": "^5.8.2"
+		"typescript": "^5.8.3"
 	}
 }
