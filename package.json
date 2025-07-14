@@ -85,7 +85,7 @@
 		"@vscode/vsce": "^3.6.0",
 		"eslint": "^9.31.0",
 		"neostandard": "^0.12.2",
-		"ovsx": "^0.10.4",
+		"ovsx": "^0.10.5",
 		"typescript": "^5.8.3"
 	}
 }
