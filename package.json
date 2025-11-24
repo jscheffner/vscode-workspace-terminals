@@ -82,7 +82,7 @@
 	"devDependencies": {
 		"@types/node": "^14.14.34",
 		"@types/vscode": "^1.37.0",
-		"@vscode/vsce": "^3.7.0",
+		"@vscode/vsce": "^3.7.1",
 		"eslint": "^9.39.1",
 		"neostandard": "^0.12.2",
 		"ovsx": "^0.10.7",
